@@ -33,56 +33,57 @@ class EmployeeDetails extends StatelessWidget {
       {'Column1': 'Salary', 'Column2': '$salary'},
       {'Column1': 'Adddres', 'Column2': '$address'},
     ];
+    var children2 = [
+      Container(
+        decoration: BoxDecoration(
+            border: Border.all(), borderRadius: BorderRadius.circular(5)),
+        child: Image.network(empImage),
+      ),
+      Card(
+        child: DataTable(
+          //dataRowHeight: 40,
+          dividerThickness: 0.000002,
+          headingRowHeight: 0,
+          columnSpacing: 20,
+          columns: [
+            DataColumn(label: Text('')),
+            DataColumn(label: Text('')),
+            DataColumn(label: Text('')),
+          ],
+          rows: data
+              .map(
+                (e) => DataRow(
+                  cells: [
+                    DataCell(Text(
+                      "${e['Column1']}",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    )),
+                    DataCell(Text(
+                      ":",
+                    )),
+                    DataCell(
+                      Text(
+                        e['Column2'],
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w400),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+              .toList(),
+        ),
+      )
+    ];
     return Scaffold(
       appBar: AppBar(title: Text('Employee Details')),
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                border: Border.all(), borderRadius: BorderRadius.circular(5)),
-            child: Image.network(empImage),
-          ),
-          Card(
-            child: DataTable(
-              //dataRowHeight: 40,
-              dividerThickness: 0.000002,
-              headingRowHeight: 0,
-              columnSpacing: 20,
-              columns: [
-                DataColumn(label: Text('')),
-                DataColumn(label: Text('')),
-                DataColumn(label: Text('')),
-              ],
-              rows: data
-                  .map(
-                    (e) => DataRow(
-                      cells: [
-                        DataCell(Text(
-                          "${e['Column1']}",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        )),
-                        DataCell(Text(
-                          ":",
-                        )),
-                        DataCell(
-                          Text(
-                            e['Column2'],
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w400),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                  .toList(),
-            ),
-          )
-        ],
+        children: children2,
       )),
     );
   }

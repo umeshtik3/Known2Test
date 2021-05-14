@@ -3,7 +3,6 @@ import 'package:known2test/Models/employee.dart';
 import 'package:known2test/Screens/EmployeeList.dart';
 import 'package:splashscreen/splashscreen.dart';
 
-
 class Splashscreen extends StatefulWidget {
   @override
   _SplashscreenState createState() => _SplashscreenState();
@@ -16,13 +15,10 @@ class _SplashscreenState extends State<Splashscreen> {
         body: SplashScreen(
       seconds: 3,
       navigateAfterSeconds: EmployeeList(),
-      image: Image.network(
-          'https://www.replas.com.au/wp-content/uploads/youtube.gif'),
+      title: Text('Welcome To Known2Test'),
       backgroundColor: Colors.white,
-      styleTextUnderTheLoader: TextStyle(),
-      photoSize: 200.0,
+      styleTextUnderTheLoader: TextStyle(fontSize: 20),
       useLoader: false,
-      //loaderColor: Colors.red
     ));
   }
 }
