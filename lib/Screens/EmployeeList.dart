@@ -32,7 +32,7 @@ class _EmployeeListState extends State<EmployeeList> {
     final String response =
         await rootBundle.loadString('assets/employees.json');
     List<Employee> jsonString = employeeFromJson(response);
-    empList.addAll(jsonString);
+    empList = jsonString;
     empList.sort((a, b) =>
         a.firstName.toLowerCase().compareTo(b.firstName.toLowerCase()));
     empList.forEach((element) {
@@ -96,14 +96,16 @@ class _EmployeeListState extends State<EmployeeList> {
                                         dob: empList[index].dob,
                                         salary: empList[index].salary,
                                         email: empList[index].email,
-                                        
                                       ))),
                           child: Card(
                             child: Column(
                               children: [
                                 ListTile(
-                                  leading: Image.network(
-                                      '${empList[index].imageUrl}'),
+                                  leading: Container(
+                                    padding: EdgeInsets.symmetric(vertical: 5),
+                                    child: Image.network(
+                                        '${empList[index].imageUrl}'),
+                                  ),
                                   title: Text(
                                       "${empList[index].firstName} ${empList[index].lastName}"),
                                 )
@@ -113,7 +115,7 @@ class _EmployeeListState extends State<EmployeeList> {
                         );
                       },
                       indexedHeight: (i) {
-                        return 80;
+                        return 70;
                       },
                     ),
 
@@ -139,18 +141,5 @@ class _EmployeeListState extends State<EmployeeList> {
               ),
             ),
     );
-  }
-
-  Future<bool> _loadMore() async {
-    print("onLoadMore");
-    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
-    fetchEmployeeList();
-    return true;
-  }
-
-  Future<void> _refresh() async {
-    await Future.delayed(Duration(seconds: 0, milliseconds: 2000));
-    empList.clear();
-    fetchEmployeeList();
   }
 }
