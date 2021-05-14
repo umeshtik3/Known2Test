@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:known2test/Models/employee.dart';
 import 'package:loadmore/loadmore.dart';
 
+import 'EmployeeDetails.dart';
+
 class EmployeeList extends StatefulWidget {
   @override
   _EmployeeListState createState() => _EmployeeListState();
@@ -12,8 +14,6 @@ class EmployeeList extends StatefulWidget {
 
 class _EmployeeListState extends State<EmployeeList> {
   List<Employee> empList;
-
-  
 
   List<String> strList = [];
 
@@ -83,16 +83,32 @@ class _EmployeeListState extends State<EmployeeList> {
                       strList: strList,
                       showPreview: true,
                       itemBuilder: (context, index) {
-                        return Card(
-                          child: Column(
-                            children: [
-                              ListTile(
-                                leading:
-                                    Image.network('${empList[index].imageUrl}'),
-                                title: Text(
-                                    "${empList[index].firstName} ${empList[index].lastName}"),
-                              )
-                            ],
+                        return InkWell(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => EmployeeDetails(
+                                        empImage: empList[index].imageUrl,
+                                        firstName: empList[index].firstName,
+                                        lstName: empList[index].lastName,
+                                        age: empList[index].age,
+                                        address: empList[index].address,
+                                        dob: empList[index].dob,
+                                        salary: empList[index].salary,
+                                        email: empList[index].email,
+                                        
+                                      ))),
+                          child: Card(
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  leading: Image.network(
+                                      '${empList[index].imageUrl}'),
+                                  title: Text(
+                                      "${empList[index].firstName} ${empList[index].lastName}"),
+                                )
+                              ],
+                            ),
                           ),
                         );
                       },
